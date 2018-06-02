@@ -8,18 +8,55 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FeatureAppsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    let cellId = "cellId"
+    
+    var appCategories: [AppCategory]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //appCategories = AppCategory.sampleAppCategories()
+        AppCategory.fetchFeaturedApps { (appCategories) -> ()  in
+            self.appCategories = appCategories
+            self.collectionView?.reloadData()
+        }
+        
+        collectionView?.backgroundColor = UIColor.white
+        
+        collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellId)
+       
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let count = appCategories?.count {
+            return count
+        }
+        return 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryCell
+        
+        cell.appCategory = appCategories?[indexPath.item]
+        
+        return cell
+    }
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 230 )
+    }
 
 }
+
 
