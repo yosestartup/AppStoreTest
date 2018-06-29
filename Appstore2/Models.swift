@@ -30,7 +30,8 @@ class AppCategory: NSObject {
             super.setValue(value, forKey: key)
         }
     }
-    static func fetchFeaturedApps(completionHandler: @escaping ([AppCategory]) -> ()) {
+    
+    static func fetchFeaturedApps(completionHandler:  @escaping ([AppCategory]) -> ()) {
         let urlString = "https://web.archive.org/web/20160728200642/www.statsallday.com/appstore/featured"
         
         URLSession.shared.dataTask(with: URL(string: urlString)!) { (data, response, error) -> Void in
@@ -87,9 +88,9 @@ class AppCategory: NSObject {
                     }
                 }
                 
-                DispatchQueue.main.async {
+      
                      completionHandler(appCategories)
-                }
+                
                
                 
                 //print (json)
@@ -102,40 +103,7 @@ class AppCategory: NSObject {
         }.resume()
     }
     
-//    static func sampleAppCategories() -> [AppCategory] {
-//
-//        let bestNewAppsCategory = AppCategory()
-//        bestNewAppsCategory.name = "Best New Apps"
-//
-//        var bestNewApps = [App]()
-//
-//        let frozenApp = App()
-//        frozenApp.name = "Disney Build It: Frozen"
-//        frozenApp.category = "Entertainment"
-//        frozenApp.imageName = "frozen"
-//        frozenApp.price = NSNumber(floatLiteral: 3.99)
-//        bestNewApps.append(frozenApp)
-//
-//        bestNewAppsCategory.apps = bestNewApps
-//
-//
-//        let bestNewGamesCategory = AppCategory()
-//        bestNewGamesCategory.name = "Best New Games"
-//
-//        var bestNewGamesApps = [App]()
-//
-//        let telepaintApp = App()
-//        telepaintApp.name = "Telepaint"
-//        telepaintApp.category = "Games"
-//        telepaintApp.imageName = "telepaint"
-//        telepaintApp.price = NSNumber(floatLiteral: 3.99)
-//        bestNewGamesApps.append(telepaintApp)
-//
-//        bestNewGamesCategory.apps = bestNewGamesApps
-//
-//        return [bestNewAppsCategory, bestNewGamesCategory]
-//    }
-//
+
 }
 
 class App: NSObject {

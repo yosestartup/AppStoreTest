@@ -12,24 +12,20 @@ class CategoryCell: UICollectionViewCell, UICollectionViewDataSource, UICollecti
     
     var appCategory: AppCategory? {
         didSet {
-            if let name = appCategory?.name  {
-                nameLabel.text = name
-            }
+             nameLabel.text = appCategory?.name
+            appsCollectionView.reloadData()
         }
     }
     private let cellId = "appCellId"
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = appCategory?.apps?.count {
-            return count
-        }
-        return 0
+        return  appCategory?.apps?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppCell
-        cell.app = appCategory?.apps?[indexPath.item]
-        return cell
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? AppCell
+      cell?.app = appCategory?.apps?[indexPath.item]
+      return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

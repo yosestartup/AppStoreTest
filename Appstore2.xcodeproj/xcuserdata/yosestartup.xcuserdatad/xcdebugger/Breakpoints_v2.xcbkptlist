@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Appstore2/Models.swift"
-            timestampString = "549628171.925621"
+            timestampString = "551736608.930516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "fetchFeaturedApps(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
